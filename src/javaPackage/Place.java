@@ -37,7 +37,6 @@ public class Place {
     private final int height;
     private Tile[][] map;
     private final Random random = new Random();
-    private int[][] playerLocation;
 
     public Place(int width, int height) {
         if (width < 10 || height < 10) {
