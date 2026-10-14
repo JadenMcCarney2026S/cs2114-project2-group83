@@ -8,6 +8,15 @@ public class Player {
     private int health;
     private int damage;
     
+        health = hp;
+        damage = dmg;
+    }
+    
+    public Player() {
+        health = 100;
+        damage = 10;
+    }
+    
     public int getHealth() {
         return health;
     }
