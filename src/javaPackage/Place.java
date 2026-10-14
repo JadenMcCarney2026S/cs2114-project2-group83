@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+// -------------------------------------------------------------------------
+/**
+ *  The place class
+ * 
+ *  @author Jaden
+ *  @version Oct 14, 2026
+ */
 public class Place {
 
     public enum Tile {
@@ -30,6 +37,7 @@ public class Place {
     private final int height;
     private Tile[][] map;
     private final Random random = new Random();
+    private int[][] playerLocation;
 
     public Place(int width, int height) {
         if (width < 10 || height < 10) {
@@ -178,4 +186,5 @@ public class Place {
     public int getHeight() {
         return height;
     }
+    
 }
