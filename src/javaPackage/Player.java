@@ -8,6 +8,7 @@ public class Player {
     private int health;
     private int damage;
     
+    public Player(int hp, int dmg) {
         health = hp;
         damage = dmg;
     }
