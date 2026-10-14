@@ -4,36 +4,25 @@ package javaPackage;
  * @author Hemanth Nimmagadda (nhemanth06)
  * @version 2026.10.15
  */
-public class Player {
+public class Player extends Enemy{
     private int health;
     private int damage;
     
     public Player(int hp, int dmg) {
-        health = hp;
-        damage = dmg;
+        super(hp, dmg);
     }
     
     public Player() {
-        health = 100;
-        damage = 10;
-    }
-    
-    public int getHealth() {
-        return health;
-    }
-    
-    public int getDamage() {
-        return damage;
+        super(100,10);
     }
     
     public void increaseHealth(int hp) {
         health+=hp;
     }
-    
+   
     public void increaseDamage(int dmg) {
         damage+=dmg;
     }
-    
     
     public void takeDamage(int dmg) {
         health-=dmg;
