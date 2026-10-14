@@ -26,6 +26,15 @@ public class Player {
         return damage;
     }
     
+    public void increaseHealth(int hp) {
+        health+=hp;
+    }
+    
+    public void increaseDamage(int dmg) {
+        damage+=dmg;
+    }
+    
+    
     public void takeDamage(int dmg) {
         health-=dmg;
     }

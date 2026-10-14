@@ -23,6 +23,16 @@ public class PlayerTest extends TestCase {
         assertEquals(25, play2.getDamage());
     }
     
+    public void testIncreaseHealth() {
+        play1.increaseHealth(10);
+        assertEquals(110, play1.getHealth());
+    }
+    
+    public void testIncreaseDamage() {
+        play1.increaseDamage(5);
+        assertEquals(15, play1.getDamage());
+    }
+    
     public void testTakeDamage() {
         play1.takeDamage(8);
         assertEquals(92,play1.getHealth());
