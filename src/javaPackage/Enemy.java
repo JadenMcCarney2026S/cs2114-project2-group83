@@ -2,10 +2,10 @@ package javaPackage;
 
 public class Enemy {
 
-    private int health;
-    private int damage;
-    private int x;
-    private int y;
+    protected int health;
+    protected int damage;
+    protected int x;
+    protected int y;
 
     public Enemy(int health, int damage, int x, int y) {
         this.health = health;

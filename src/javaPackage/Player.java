@@ -5,8 +5,6 @@ package javaPackage;
  * @version 2026.10.15
  */
 public class Player extends Enemy{
-    private int health;
-    private int damage;
     
     public Player(int hp, int dmg, int x, int y) {
         super(hp, dmg, x, y);
