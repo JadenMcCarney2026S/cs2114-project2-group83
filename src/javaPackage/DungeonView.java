@@ -37,5 +37,58 @@ public class DungeonView {
 
         place.setMap(dungeon);
         place.printMap();
+        
+        Place place2 = new Place(40, 40);
+        Place.Tile[][] dungeon2 = {
+            {W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W},
+            {W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,F,F,F,F,F,F,F,F,F,F,F,F,W,W,W,W,W,W,W,W,W,W},
+            {W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W},
+            {W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W}
+        };
+
+        dungeon2[2][2] = Place.Tile.PLAYER;
+        dungeon2[4][24] = Place.Tile.TREASURE;
+        dungeon2[20][23] = Place.Tile.ENEMY;
+        dungeon2[30][8] = Place.Tile.ENEMY;
+        dungeon2[35][35] = Place.Tile.EXIT;
+
+        place2.setMap(dungeon2);
+        place2.printMap();
     }
 }
