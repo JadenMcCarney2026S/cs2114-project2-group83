@@ -1,42 +1,84 @@
+
 package javaPackage;
+
 /**
- * A class to represent the player in the game
- * @author Hemanth Nimmagadda (nhemanth06)
- * @version 2026.10.15
+ * Represents the player in the dungeon crawler.
  */
-public class Player extends Enemy{
+public class Player {
     private int health;
     private int damage;
-    
+    private int x;
+    private int y;
+
     public Player(int hp, int dmg, int x, int y) {
-        super(hp, dmg, x, y);
+        if (hp <= 0 || dmg < 0) {
+            throw new IllegalArgumentException(
+                "Health must be positive and damage cannot be negative."
+            );
+        }
+        this.health = hp;
+        this.damage = dmg;
+        this.x = x;
+        this.y = y;
     }
-    
+
     public Player() {
-        super(100,10, 0, 0);
+        this(100, 10, 1, 1);
     }
-    
-    public void increaseHealth(int hp) {
-        health+=hp;
+
+    public int getHealth() {
+        return health;
     }
-   
-    public void increaseDamage(int dmg) {
-        damage+=dmg;
+
+    public int getDamage() {
+        return damage;
     }
-    
-    public void takeDamage(int dmg) {
-        health-=dmg;
+
+    public int getX() {
+        return x;
     }
-    
-    public void attack(Enemy en) {
-        en.takeDamage(damage);
+
+    public int getY() {
+        return y;
     }
-    
-    public void heal(int heals) {
-        health+=heals;
+
+    public void setX(int x) {
+        this.x = x;
     }
-    
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void increaseHealth(int amount) {
+        if (amount > 0) {
+            health += amount;
+        }
+    }
+
+    public void increaseDamage(int amount) {
+        if (amount > 0) {
+            damage += amount;
+        }
+    }
+
+    public void takeDamage(int amount) {
+        if (amount > 0) {
+            health = Math.max(0, health - amount);
+        }
+    }
+
+    public void attack(Enemy enemy) {
+        if (enemy != null && !enemy.isDefeated()) {
+            enemy.takeDamage(damage);
+        }
+    }
+
+    public void heal(int amount) {
+        increaseHealth(amount);
+    }
+
     public boolean isAlive() {
-        return health>0;
+        return health > 0;
     }
 }
