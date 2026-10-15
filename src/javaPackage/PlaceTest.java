@@ -148,10 +148,10 @@ public class PlaceTest extends TestCase {
      * Tests the tile symbols.
      */
     public void testTileSymbols() {
-        assertEquals('#', Place.Tile.WALL.getSymbol());
+        assertEquals('■', Place.Tile.WALL.getSymbol());
         assertEquals(' ', Place.Tile.FLOOR.getSymbol());
-        assertEquals('@', Place.Tile.PLAYER.getSymbol());
-        assertEquals('E', Place.Tile.ENEMY.getSymbol());
+        assertEquals('웃', Place.Tile.PLAYER.getSymbol());
+        assertEquals('敵', Place.Tile.ENEMY.getSymbol());
         assertEquals('$', Place.Tile.TREASURE.getSymbol());
         assertEquals('X', Place.Tile.EXIT.getSymbol());
     }
