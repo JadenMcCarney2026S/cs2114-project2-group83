@@ -4,6 +4,8 @@ public class Enemy {
 
     private int health;
     private int damage;
+    private int x;
+    private int y;
 
     public Enemy(int health, int damage) {
         this.health = health;
@@ -34,6 +36,22 @@ public class Enemy {
 
     public boolean isDefeated() {
         return health <= 0;
+    }
+    
+    public int getX() {
+        return x;
+    }
+    
+    public int getY() {
+        return y;
+    }
+    
+    public void setX(int x) {
+        this.x = x;
+    }
+    
+    public void setY(int y) {
+        this.y = y;
     }
 }
 
