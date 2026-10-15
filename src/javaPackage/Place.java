@@ -15,10 +15,10 @@ import java.util.Random;
 public class Place {
 
     public enum Tile {
-        WALL('#'),
+        WALL('■'),
         FLOOR(' '),
-        PLAYER('@'),
-        ENEMY('E'),
+        PLAYER('웃'),
+        ENEMY('敵'),
         TREASURE('$'),
         EXIT('X');
 
@@ -184,6 +184,10 @@ public class Place {
 
     public int getHeight() {
         return height;
+    }
+    
+    public void setMap(Tile[][] map) {
+        this.map = map;
     }
     
 }
