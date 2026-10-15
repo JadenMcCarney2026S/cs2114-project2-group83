@@ -5,7 +5,7 @@ public class EnemyTest extends TestCase {
     private Enemy enemy;
 
     public void setUp() {
-        enemy = new Enemy(100, 15);
+        enemy = new Enemy(100, 15, 0, 0);
     }
 
     public void testGetHealth() {

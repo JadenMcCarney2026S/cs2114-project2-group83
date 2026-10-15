@@ -9,8 +9,8 @@ public class PlayerTest extends TestCase {
     
     public void setUp() {
         play1 = new Player();
-        play2 = new Player(150, 25);
-        enem = new Enemy(20,5);
+        play2 = new Player(150, 25, 0, 0);
+        enem = new Enemy(20,5, 0, 0);
     }
     
     public void testGetHealth() {
