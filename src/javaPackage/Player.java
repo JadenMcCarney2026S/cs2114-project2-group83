@@ -8,12 +8,12 @@ public class Player extends Enemy{
     private int health;
     private int damage;
     
-    public Player(int hp, int dmg) {
-        super(hp, dmg);
+    public Player(int hp, int dmg, int x, int y) {
+        super(hp, dmg, x, y);
     }
     
     public Player() {
-        super(100,10);
+        super(100,10, 0, 0);
     }
     
     public void increaseHealth(int hp) {

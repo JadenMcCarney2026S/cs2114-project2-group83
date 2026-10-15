@@ -7,9 +7,11 @@ public class Enemy {
     private int x;
     private int y;
 
-    public Enemy(int health, int damage) {
+    public Enemy(int health, int damage, int x, int y) {
         this.health = health;
         this.damage = damage;
+        this.x = x;
+        this.y = y;
     }
 
     public int getHealth() {
