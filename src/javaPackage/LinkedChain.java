@@ -12,7 +12,7 @@
  *
  * Time complexity, where n is the number of entries:
  *   add              O(1)
- *   addToEnd         O(n)
+ *   addToEnd         O(1)
  *   remove()         O(1)
  *   remove(T)        O(n)
  *   clear            O(1)
@@ -34,6 +34,7 @@ package javaPackage;
 public class LinkedChain<T>
 {
     private Node<T> firstNode;   // reference to the first node, or null
+    private Node<T> lastNode;
     private int numberOfEntries; // number of nodes in the chain
 
     /**
@@ -42,6 +43,7 @@ public class LinkedChain<T>
     public LinkedChain()
     {
         firstNode = null;
+        lastNode = null;
         numberOfEntries = 0;
     }
 
@@ -56,6 +58,10 @@ public class LinkedChain<T>
     {
         requireNonNull(newEntry);
         firstNode = new Node<T>(newEntry, firstNode);
+        if (lastNode == null)
+        {
+            lastNode = firstNode;
+        }
         numberOfEntries++;
         return true;
     }
@@ -71,19 +77,15 @@ public class LinkedChain<T>
     {
         requireNonNull(newEntry);
         Node<T> newNode = new Node<T>(newEntry);
-        if (firstNode == null)
+        if (lastNode == null)
         {
             firstNode = newNode;
         }
         else
         {
-            Node<T> current = firstNode;
-            while (current.next != null)
-            {
-                current = current.next;
-            }
-            current.next = newNode;
+            lastNode.next = newNode;
         }
+        lastNode = newNode;
         numberOfEntries++;
         return true;
     }
@@ -102,6 +104,10 @@ public class LinkedChain<T>
         T result = firstNode.data;
         firstNode = firstNode.next;
         numberOfEntries--;
+        if (numberOfEntries == 0)
+        {
+            lastNode = null;
+        }
         return result;
     }
 
@@ -119,8 +125,7 @@ public class LinkedChain<T>
         }
         if (anEntry.equals(firstNode.data))
         {
-            firstNode = firstNode.next;
-            numberOfEntries--;
+            remove();
             return true;
         }
         Node<T> previous = firstNode;
@@ -130,6 +135,10 @@ public class LinkedChain<T>
             if (anEntry.equals(current.data))
             {
                 previous.next = current.next;
+                if (current == lastNode)
+                {
+                    lastNode = previous;
+                }
                 numberOfEntries--;
                 return true;
             }
@@ -139,12 +148,65 @@ public class LinkedChain<T>
         return false;
     }
 
+    /** Inserts an entry at a zero-based position, including size(). */
+    public boolean add(int index, T item)
+    {
+        if (index < 0 || index > numberOfEntries)
+        {
+            throw new IndexOutOfBoundsException("Invalid insertion index: " + index);
+        }
+        requireNonNull(item);
+        if (index == 0)
+        {
+            return add(item);
+        }
+        if (index == numberOfEntries)
+        {
+            return addToEnd(item);
+        }
+        Node<T> previous = firstNode;
+        for (int i = 1; i < index; i++)
+        {
+            previous = previous.next;
+        }
+        previous.next = new Node<T>(item, previous.next);
+        numberOfEntries++;
+        return true;
+    }
+
+    /** Removes and returns the entry at a zero-based position. */
+    public T remove(int index)
+    {
+        if (index < 0 || index >= numberOfEntries)
+        {
+            throw new IndexOutOfBoundsException("Invalid removal index: " + index);
+        }
+        if (index == 0)
+        {
+            return remove();
+        }
+        Node<T> previous = firstNode;
+        for (int i = 1; i < index; i++)
+        {
+            previous = previous.next;
+        }
+        Node<T> removed = previous.next;
+        previous.next = removed.next;
+        if (removed == lastNode)
+        {
+            lastNode = previous;
+        }
+        numberOfEntries--;
+        return removed.data;
+    }
+
     /**
      * Removes all entries from this chain.
      */
     public void clear()
     {
         firstNode = null;
+        lastNode = null;
         numberOfEntries = 0;
     }
 

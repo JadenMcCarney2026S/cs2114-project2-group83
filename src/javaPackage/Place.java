@@ -1,9 +1,6 @@
 
 package javaPackage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 // -------------------------------------------------------------------------
 /**
@@ -33,10 +30,12 @@ public class Place {
         }
     }
 
+    private String name = "Dungeon";
+    private int position;
+
     private final int width;
     private final int height;
     private Tile[][] map;
-    private final Random random = new Random();
 
     public Place(int width, int height) {
         if (width < 10 || height < 10) {
@@ -57,79 +56,6 @@ public class Place {
             for (int x = 0; x < width; x++) {
                 map[y][x] = Tile.WALL;
             }
-        }
-    }
-
-    private void generateDungeon() {
-        // Create several rectangular rooms.
-        int roomCount = Math.max(3, (width * height) / 150);
-        List<int[]> roomCenters = new ArrayList<>();
-
-        for (int i = 0; i < roomCount; i++) {
-            int roomWidth = random.nextInt(5) + 4;
-            int roomHeight = random.nextInt(4) + 4;
-
-            if (roomWidth >= width - 2 ||
-                roomHeight >= height - 2) {
-                continue;
-            }
-
-            int x = random.nextInt(width - roomWidth - 1) + 1;
-            int y = random.nextInt(height - roomHeight - 1) + 1;
-
-            carveRoom(x, y, roomWidth, roomHeight);
-
-            int centerX = x + roomWidth / 2;
-            int centerY = y + roomHeight / 2;
-            roomCenters.add(new int[]{centerX, centerY});
-
-            // Connect each room to the previous room.
-            if (roomCenters.size() > 1) {
-                int[] previous =
-                    roomCenters.get(roomCenters.size() - 2);
-
-                carveCorridor(
-                    previous[0], previous[1],
-                    centerX, centerY
-                );
-            }
-        }
-
-        // Ensure there's at least one walkable tile.
-        if (roomCenters.isEmpty()) {
-            map[height / 2][width / 2] = Tile.FLOOR;
-        }
-
-        // Place an exit in the last room.
-        int[] lastCenter = roomCenters.isEmpty()
-            ? new int[]{width / 2, height / 2}
-            : roomCenters.get(roomCenters.size() - 1);
-
-        map[lastCenter[1]][lastCenter[0]] = Tile.EXIT;
-    }
-
-    private void carveRoom(
-        int x, int y, int roomWidth, int roomHeight
-    ) {
-        for (int row = y; row < y + roomHeight; row++) {
-            for (int col = x; col < x + roomWidth; col++) {
-                map[row][col] = Tile.FLOOR;
-            }
-        }
-    }
-
-    private void carveCorridor(
-        int x1, int y1, int x2, int y2
-    ) {
-        // Horizontal, then vertical.
-        for (int x = Math.min(x1, x2);
-             x <= Math.max(x1, x2); x++) {
-            map[y1][x] = Tile.FLOOR;
-        }
-
-        for (int y = Math.min(y1, y2);
-             y <= Math.max(y1, y2); y++) {
-            map[y][x2] = Tile.FLOOR;
         }
     }
 
@@ -186,8 +112,45 @@ public class Place {
         return height;
     }
     
+    public String getName() {
+        return name;
+    }
+
+    protected void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name is required.");
+        }
+        this.name = name;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        if (position < 0) {
+            throw new IllegalArgumentException("Position cannot be negative.");
+        }
+        this.position = position;
+    }
+
     public void setMap(Tile[][] map) {
-        this.map = map;
+        if (map == null || map.length != height) {
+            throw new IllegalArgumentException("Map height does not match.");
+        }
+        Tile[][] copy = new Tile[height][width];
+        for (int row = 0; row < height; row++) {
+            if (map[row] == null || map[row].length != width) {
+                throw new IllegalArgumentException("Map must be rectangular.");
+            }
+            for (int col = 0; col < width; col++) {
+                if (map[row][col] == null) {
+                    throw new IllegalArgumentException("Tile cannot be null.");
+                }
+                copy[row][col] = map[row][col];
+            }
+        }
+        this.map = copy;
     }
     
 }

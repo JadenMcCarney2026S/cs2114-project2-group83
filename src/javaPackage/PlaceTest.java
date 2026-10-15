@@ -148,10 +148,10 @@ public class PlaceTest extends TestCase {
      * Tests the tile symbols.
      */
     public void testTileSymbols() {
-        assertEquals('#', Place.Tile.WALL.getSymbol());
+        assertEquals('■', Place.Tile.WALL.getSymbol());
         assertEquals(' ', Place.Tile.FLOOR.getSymbol());
-        assertEquals('@', Place.Tile.PLAYER.getSymbol());
-        assertEquals('E', Place.Tile.ENEMY.getSymbol());
+        assertEquals('웃', Place.Tile.PLAYER.getSymbol());
+        assertEquals('敵', Place.Tile.ENEMY.getSymbol());
         assertEquals('$', Place.Tile.TREASURE.getSymbol());
         assertEquals('X', Place.Tile.EXIT.getSymbol());
     }
@@ -163,5 +163,40 @@ public class PlaceTest extends TestCase {
         dungeon.setTile(1, 1, Place.Tile.PLAYER);
         dungeon.printMap();
         assertEquals(20, dungeon.getHeight());
+    }
+
+    public void testNameAndPosition() {
+        assertEquals("Dungeon", dungeon.getName());
+        assertEquals(0, dungeon.getPosition());
+        dungeon.setPosition(2);
+        assertEquals(2, dungeon.getPosition());
+        try {
+            dungeon.setPosition(-1);
+            fail("Negative position");
+        }
+        catch (IllegalArgumentException expected) {
+            assertEquals(2, dungeon.getPosition());
+        }
+    }
+
+    public void testSetMap() {
+        Place.Tile[][] map = new Place.Tile[20][20];
+        for (Place.Tile[] row : map) {
+            java.util.Arrays.fill(row, Place.Tile.FLOOR);
+        }
+        dungeon.setMap(map);
+        map[0][0] = Place.Tile.WALL;
+        assertEquals(Place.Tile.FLOOR, dungeon.getTile(0, 0));
+        Place.Tile[][][] invalid = {null, new Place.Tile[10][10],
+            new Place.Tile[20][], new Place.Tile[20][20]};
+        for (Place.Tile[][] bad : invalid) {
+            try {
+                dungeon.setMap(bad);
+                fail("Invalid map");
+            }
+            catch (IllegalArgumentException expected) {
+                assertEquals(Place.Tile.FLOOR, dungeon.getTile(0, 0));
+            }
+        }
     }
 }

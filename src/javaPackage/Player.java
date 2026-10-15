@@ -5,38 +5,43 @@ package javaPackage;
  * @version 2026.10.15
  */
 public class Player extends Enemy{
-    private int health;
-    private int damage;
+
     
     public Player(int hp, int dmg, int x, int y) {
         super(hp, dmg, x, y);
     }
     
+    public Player(int hp, int dmg) {
+        this(hp, dmg, 0, 0);
+    }
+
     public Player() {
         super(100,10, 0, 0);
     }
     
     public void increaseHealth(int hp) {
-        health+=hp;
+        addHealth(hp);
     }
    
     public void increaseDamage(int dmg) {
-        damage+=dmg;
+        addDamage(dmg);
     }
     
     public void takeDamage(int dmg) {
-        health-=dmg;
+        super.takeDamage(dmg);
     }
     
     public void attack(Enemy en) {
-        en.takeDamage(damage);
+        if (en != null && isAlive()) {
+            en.takeDamage(getDamage());
+        }
     }
     
     public void heal(int heals) {
-        health+=heals;
+        increaseHealth(heals);
     }
     
     public boolean isAlive() {
-        return health>0;
+        return getHealth() > 0;
     }
 }

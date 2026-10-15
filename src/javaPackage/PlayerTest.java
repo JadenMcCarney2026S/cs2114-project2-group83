@@ -53,4 +53,39 @@ public class PlayerTest extends TestCase {
         play2.takeDamage(160);
         assertFalse(play2.isAlive());
     }
+
+    public void testBadInputsAndSharedStats() {
+        play1.increaseHealth(-20);
+        play1.increaseDamage(-20);
+        play1.takeDamage(-20);
+        play1.heal(-20);
+        play1.attack((Enemy)null);
+        assertEquals(100, play1.getHealth());
+        assertEquals(10, play1.getDamage());
+        play1.increaseDamage(5);
+        play1.attack(enem);
+        assertEquals(5, enem.getHealth());
+        Player positioned = new Player(80, 7, 3, 4);
+        assertEquals(3, positioned.getX());
+        assertEquals(4, positioned.getY());
+        assertEquals(80, positioned.getHealth());
+        play1.takeDamage(200);
+        play1.attack(enem);
+        assertEquals(5, enem.getHealth());
+        assertEquals(0, play1.getHealth());
+        assertFalse(play1.isAlive());
+        Player invalid = new Player(-1, -1);
+        assertEquals(0, invalid.getHealth());
+        assertEquals(0, invalid.getDamage());
+    }
+
+    public void testPositionedPlayerRejectsBadCoordinates() {
+        try {
+            new Player(100, 10, -1, 0);
+            fail("Negative starting coordinate");
+        }
+        catch (IllegalArgumentException expected) {
+            assertNotNull(expected);
+        }
+    }
 }
