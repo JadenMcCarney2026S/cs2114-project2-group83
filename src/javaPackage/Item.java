@@ -7,7 +7,7 @@ public class Item extends Enemy {
     private int damageBonus;
 
     public Item(String name, int healthBonus, int damageBonus) {
-        super(0, 0, 0, 0);
+        super(0, 0, 0, 0, "item");
 
         this.name = name;
         this.healthBonus = healthBonus;

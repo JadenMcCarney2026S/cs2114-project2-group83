@@ -5,7 +5,7 @@ public class EnemyTest extends TestCase {
     private Enemy enemy;
 
     public void setUp() {
-        enemy = new Enemy(100, 15, 0, 0);
+        enemy = new Enemy(100, 15, 0, 0, "Grunt");
     }
 
     public void testGetHealth() {
@@ -14,6 +14,9 @@ public class EnemyTest extends TestCase {
 
     public void testGetDamage() {
         assertEquals(15, enemy.getDamage());
+    }
+    public void testGetName() {
+        assertEquals("Grunt", enemy.getName());
     }
 
     public void testTakeDamage() {

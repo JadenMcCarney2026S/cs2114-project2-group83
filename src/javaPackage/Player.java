@@ -7,11 +7,11 @@ package javaPackage;
 public class Player extends Enemy{
     
     public Player(int hp, int dmg, int x, int y) {
-        super(hp, dmg, x, y);
+        super(hp, dmg, x, y, "Player");
     }
     
     public Player() {
-        super(100,10, 0, 0);
+        super(100,10, 0, 0, "Player");
     }
     
     public void increaseHealth(int hp) {

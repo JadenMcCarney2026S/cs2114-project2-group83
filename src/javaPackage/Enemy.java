@@ -6,12 +6,14 @@ public class Enemy {
     protected int damage;
     protected int x;
     protected int y;
+    protected String name;
 
-    public Enemy(int health, int damage, int x, int y) {
+    public Enemy(int health, int damage, int x, int y, String name) {
         this.health = health;
         this.damage = damage;
         this.x = x;
         this.y = y;
+        this.name = name;
     }
 
     public int getHealth() {
@@ -20,6 +22,10 @@ public class Enemy {
 
     public int getDamage() {
         return damage;
+    }
+    
+    public String getName() {
+        return name;
     }
 
     public void takeDamage(int amount) {

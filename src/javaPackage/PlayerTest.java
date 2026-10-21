@@ -1,7 +1,11 @@
 package javaPackage;
 
 import student.TestCase;
-
+/**
+ * A test class for Player
+ * @author Hemanth Nimmagadda (nhemanth06)
+ * @version 2026.10.15
+ */
 public class PlayerTest extends TestCase {
     private Player play1;
     private Player play2;
@@ -10,7 +14,7 @@ public class PlayerTest extends TestCase {
     public void setUp() {
         play1 = new Player();
         play2 = new Player(150, 25, 0, 0);
-        enem = new Enemy(20,5, 0, 0);
+        enem = new Enemy(20,5, 0, 0, "Grunt");
     }
     
     public void testGetHealth() {
