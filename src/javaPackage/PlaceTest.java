@@ -9,42 +9,53 @@ import student.TestCase;
  * @author
  * @version 2026-10-14
  */
-public class PlaceTest extends TestCase {
+public class PlaceTest
+    extends TestCase
+{
 
     private Place dungeon;
 
     /**
      * Sets up a new dungeon before each test.
      */
-    public void setUp() {
+    public void setUp()
+    {
         dungeon = new Place(20, 20);
     }
+
 
     /**
      * Tests that the map is created with the correct dimensions.
      */
-    public void testConstructor() {
+    public void testConstructor()
+    {
         assertEquals(20, dungeon.getWidth());
         assertEquals(20, dungeon.getHeight());
     }
 
+
     /**
      * Tests that small maps are rejected.
      */
-    public void testInvalidDimensions() {
-        try {
+    public void testInvalidDimensions()
+    {
+        try
+        {
             new Place(5, 5);
             fail("Expected IllegalArgumentException");
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException e)
+        {
             assertNotNull(e);
         }
     }
 
+
     /**
      * Tests whether coordinates are inside the map.
      */
-    public void testIsInside() {
+    public void testIsInside()
+    {
         assertTrue(dungeon.isInside(0, 0));
         assertTrue(dungeon.isInside(19, 19));
         assertFalse(dungeon.isInside(-1, 0));
@@ -53,77 +64,89 @@ public class PlaceTest extends TestCase {
         assertFalse(dungeon.isInside(0, 20));
     }
 
+
     /**
      * Tests tile access and map boundaries.
      */
-    public void testGetTile() {
+    public void testGetTile()
+    {
         assertNotNull(dungeon.getTile(0, 0));
         assertNotNull(dungeon.getTile(10, 10));
 
-        try {
+        try
+        {
             dungeon.getTile(-1, 0);
             fail("Expected IndexOutOfBoundsException");
         }
-        catch (IndexOutOfBoundsException e) {
+        catch (IndexOutOfBoundsException e)
+        {
             assertNotNull(e);
         }
 
-        try {
+        try
+        {
             dungeon.getTile(20, 20);
             fail("Expected IndexOutOfBoundsException");
         }
-        catch (IndexOutOfBoundsException e) {
+        catch (IndexOutOfBoundsException e)
+        {
             assertNotNull(e);
         }
     }
+
 
     /**
      * Tests setting and retrieving tiles.
      */
-    public void testSetTile() {
+    public void testSetTile()
+    {
         dungeon.setTile(5, 5, Place.Tile.PLAYER);
-        assertEquals(
-            Place.Tile.PLAYER,
-            dungeon.getTile(5, 5)
-        );
+        assertEquals(Place.Tile.PLAYER, dungeon.getTile(5, 5));
 
         dungeon.setTile(5, 5, Place.Tile.TREASURE);
-        assertEquals(
-            Place.Tile.TREASURE,
-            dungeon.getTile(5, 5)
-        );
+        assertEquals(Place.Tile.TREASURE, dungeon.getTile(5, 5));
     }
+
 
     /**
      * Tests that null tiles are rejected.
      */
-    public void testSetNullTile() {
-        try {
+    public void testSetNullTile()
+    {
+        try
+        {
             dungeon.setTile(5, 5, null);
             fail("Expected IllegalArgumentException");
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException e)
+        {
             assertNotNull(e);
         }
     }
+
 
     /**
      * Tests that setting a tile outside the map fails.
      */
-    public void testSetTileOutsideMap() {
-        try {
+    public void testSetTileOutsideMap()
+    {
+        try
+        {
             dungeon.setTile(-1, 0, Place.Tile.FLOOR);
             fail("Expected IndexOutOfBoundsException");
         }
-        catch (IndexOutOfBoundsException e) {
+        catch (IndexOutOfBoundsException e)
+        {
             assertNotNull(e);
         }
     }
 
+
     /**
      * Tests walkability of tiles.
      */
-    public void testIsWalkable() {
+    public void testIsWalkable()
+    {
         // A wall is not walkable.
         dungeon.setTile(1, 1, Place.Tile.WALL);
         assertFalse(dungeon.isWalkable(1, 1));
@@ -144,10 +167,12 @@ public class PlaceTest extends TestCase {
         assertFalse(dungeon.isWalkable(20, 20));
     }
 
+
     /**
      * Tests the tile symbols.
      */
-    public void testTileSymbols() {
+    public void testTileSymbols()
+    {
         assertEquals('#', Place.Tile.WALL.getSymbol());
         assertEquals(' ', Place.Tile.FLOOR.getSymbol());
         assertEquals('@', Place.Tile.PLAYER.getSymbol());
@@ -156,10 +181,12 @@ public class PlaceTest extends TestCase {
         assertEquals('X', Place.Tile.EXIT.getSymbol());
     }
 
+
     /**
      * Tests that printing the map does not throw an exception.
      */
-    public void testPrintMap() {
+    public void testPrintMap()
+    {
         dungeon.setTile(1, 1, Place.Tile.PLAYER);
         dungeon.printMap();
         assertEquals(20, dungeon.getHeight());

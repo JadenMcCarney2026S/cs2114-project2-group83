@@ -1,59 +1,71 @@
 package javaPackage;
 
-public class Enemy {
+/** A moving dungeon enemy. */
+public class Enemy
+{
+    private int health, damage, x, y;
 
-    private int health;
-    private int damage;
-    private int x;
-    private int y;
-
-    public Enemy(int health, int damage, int x, int y) {
-        this.health = health;
-        this.damage = damage;
+    public Enemy(int health, int damage, int x, int y)
+    {
+        this.health = Math.max(0, health);
+        this.damage = Math.max(0, damage);
         this.x = x;
         this.y = y;
     }
 
-    public int getHealth() {
+
+    public int getHealth()
+    {
         return health;
     }
 
-    public int getDamage() {
+
+    public int getDamage()
+    {
         return damage;
     }
 
-    public void takeDamage(int amount) {
-        health = health - amount;
 
-        if (health < 0) {
-            health = 0;
-        }
+    public void takeDamage(int amount)
+    {
+        if (amount > 0)
+            health = Math.max(0, health - amount);
     }
 
-    public void attack(Player player) {
-        if (!isDefeated()) {
+
+    public void attack(Player player)
+    {
+        if (player != null && !isDefeated())
             player.takeDamage(damage);
-        }
     }
 
-    public boolean isDefeated() {
+
+    public boolean isDefeated()
+    {
         return health <= 0;
     }
-    
-    public int getX() {
+
+
+    public int getX()
+    {
         return x;
     }
-    
-    public int getY() {
+
+
+    public int getY()
+    {
         return y;
     }
-    
-    public void setX(int x) {
+
+
+    public void setX(int x)
+    {
         this.x = x;
     }
-    
-    public void setY(int y) {
+
+
+    public void setY(int y)
+    {
         this.y = y;
     }
 }
-

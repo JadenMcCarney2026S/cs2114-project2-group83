@@ -1,22 +1,33 @@
 package javaPackage;
+
 import student.TestCase;
-public class EnemyTest extends TestCase {
+
+public class EnemyTest
+    extends TestCase
+{
 
     private Enemy enemy;
 
-    public void setUp() {
+    public void setUp()
+    {
         enemy = new Enemy(100, 15, 0, 0);
     }
 
-    public void testGetHealth() {
+
+    public void testGetHealth()
+    {
         assertEquals(100, enemy.getHealth());
     }
 
-    public void testGetDamage() {
+
+    public void testGetDamage()
+    {
         assertEquals(15, enemy.getDamage());
     }
 
-    public void testTakeDamage() {
+
+    public void testTakeDamage()
+    {
         enemy.takeDamage(20);
         assertEquals(80, enemy.getHealth());
 
@@ -27,7 +38,9 @@ public class EnemyTest extends TestCase {
         assertEquals(0, enemy.getHealth());
     }
 
-    public void testIsDefeated() {
+
+    public void testIsDefeated()
+    {
         assertFalse(enemy.isDefeated());
 
         enemy.takeDamage(50);

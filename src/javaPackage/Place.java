@@ -7,14 +7,16 @@ import java.util.Random;
 
 // -------------------------------------------------------------------------
 /**
- *  The place class
+ * The place class
  * 
- *  @author Jaden
- *  @version Oct 14, 2026
+ * @author Jaden
+ * @version Oct 14, 2026
  */
-public class Place {
+public class Place
+{
 
-    public enum Tile {
+    public enum Tile
+    {
         WALL('■'),
         FLOOR(' '),
         PLAYER('웃'),
@@ -24,11 +26,14 @@ public class Place {
 
         private final char symbol;
 
-        Tile(char symbol) {
+        Tile(char symbol)
+        {
             this.symbol = symbol;
         }
 
-        public char getSymbol() {
+
+        public char getSymbol()
+        {
             return symbol;
         }
     }
@@ -38,11 +43,12 @@ public class Place {
     private Tile[][] map;
     private final Random random = new Random();
 
-    public Place(int width, int height) {
-        if (width < 10 || height < 10) {
+    public Place(int width, int height)
+    {
+        if (width < 10 || height < 10)
+        {
             throw new IllegalArgumentException(
-                "Map dimensions must be at least 10x10."
-            );
+                "Map dimensions must be at least 10x10.");
         }
 
         this.width = width;
@@ -50,27 +56,35 @@ public class Place {
         this.map = new Tile[height][width];
 
         fillWithWalls();
+        generateDungeon();
     }
 
-    private void fillWithWalls() {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+
+    private void fillWithWalls()
+    {
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
                 map[y][x] = Tile.WALL;
             }
         }
     }
 
-    private void generateDungeon() {
+
+    private void generateDungeon()
+    {
         // Create several rectangular rooms.
         int roomCount = Math.max(3, (width * height) / 150);
         List<int[]> roomCenters = new ArrayList<>();
 
-        for (int i = 0; i < roomCount; i++) {
+        for (int i = 0; i < roomCount; i++)
+        {
             int roomWidth = random.nextInt(5) + 4;
             int roomHeight = random.nextInt(4) + 4;
 
-            if (roomWidth >= width - 2 ||
-                roomHeight >= height - 2) {
+            if (roomWidth >= width - 2 || roomHeight >= height - 2)
+            {
                 continue;
             }
 
@@ -81,113 +95,151 @@ public class Place {
 
             int centerX = x + roomWidth / 2;
             int centerY = y + roomHeight / 2;
-            roomCenters.add(new int[]{centerX, centerY});
+            roomCenters.add(new int[] { centerX, centerY });
 
             // Connect each room to the previous room.
-            if (roomCenters.size() > 1) {
-                int[] previous =
-                    roomCenters.get(roomCenters.size() - 2);
+            if (roomCenters.size() > 1)
+            {
+                int[] previous = roomCenters.get(roomCenters.size() - 2);
 
-                carveCorridor(
-                    previous[0], previous[1],
-                    centerX, centerY
-                );
+                carveCorridor(previous[0], previous[1], centerX, centerY);
             }
         }
 
         // Ensure there's at least one walkable tile.
-        if (roomCenters.isEmpty()) {
+        if (roomCenters.isEmpty())
+        {
             map[height / 2][width / 2] = Tile.FLOOR;
+        }
+
+        // Ensure the entrance is reachable from the first room.
+        for (int x = 1; x <= Math.max(1, width / 2); x++)
+        {
+            map[1][x] = Tile.FLOOR;
+        }
+        for (int y = 1; y <= Math.max(1, height / 2); y++)
+        {
+            map[y][Math.max(1, width / 2)] = Tile.FLOOR;
         }
 
         // Place an exit in the last room.
         int[] lastCenter = roomCenters.isEmpty()
-            ? new int[]{width / 2, height / 2}
+            ? new int[] { width / 2, height / 2 }
             : roomCenters.get(roomCenters.size() - 1);
 
         map[lastCenter[1]][lastCenter[0]] = Tile.EXIT;
     }
 
-    private void carveRoom(
-        int x, int y, int roomWidth, int roomHeight
-    ) {
-        for (int row = y; row < y + roomHeight; row++) {
-            for (int col = x; col < x + roomWidth; col++) {
+
+    private void carveRoom(int x, int y, int roomWidth, int roomHeight)
+    {
+        for (int row = y; row < y + roomHeight; row++)
+        {
+            for (int col = x; col < x + roomWidth; col++)
+            {
                 map[row][col] = Tile.FLOOR;
             }
         }
     }
 
-    private void carveCorridor(
-        int x1, int y1, int x2, int y2
-    ) {
+
+    private void carveCorridor(int x1, int y1, int x2, int y2)
+    {
         // Horizontal, then vertical.
-        for (int x = Math.min(x1, x2);
-             x <= Math.max(x1, x2); x++) {
+        for (int x = Math.min(x1, x2); x <= Math.max(x1, x2); x++)
+        {
             map[y1][x] = Tile.FLOOR;
         }
 
-        for (int y = Math.min(y1, y2);
-             y <= Math.max(y1, y2); y++) {
+        for (int y = Math.min(y1, y2); y <= Math.max(y1, y2); y++)
+        {
             map[y][x2] = Tile.FLOOR;
         }
     }
 
-    public boolean isInside(int x, int y) {
-        return x >= 0 && x < width
-            && y >= 0 && y < height;
+
+    public boolean isInside(int x, int y)
+    {
+        return x >= 0 && x < width && y >= 0 && y < height;
     }
 
-    public boolean isWalkable(int x, int y) {
-        return isInside(x, y)
-            && map[y][x] != Tile.WALL;
+
+    public boolean isWalkable(int x, int y)
+    {
+        return isInside(x, y) && map[y][x] != Tile.WALL;
     }
 
-    public Tile getTile(int x, int y) {
-        if (!isInside(x, y)) {
+
+    public Tile getTile(int x, int y)
+    {
+        if (!isInside(x, y))
+        {
             throw new IndexOutOfBoundsException(
-                "Coordinates outside the dungeon."
-            );
+                "Coordinates outside the dungeon.");
         }
 
         return map[y][x];
     }
 
-    public void setTile(int x, int y, Tile tile) {
-        if (!isInside(x, y)) {
+
+    public void setTile(int x, int y, Tile tile)
+    {
+        if (!isInside(x, y))
+        {
             throw new IndexOutOfBoundsException(
-                "Coordinates outside the dungeon."
-            );
+                "Coordinates outside the dungeon.");
         }
 
-        if (tile == null) {
-            throw new IllegalArgumentException(
-                "Tile cannot be null."
-            );
+        if (tile == null)
+        {
+            throw new IllegalArgumentException("Tile cannot be null.");
         }
 
         map[y][x] = tile;
     }
 
-    public void printMap() {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+
+    public void printMap()
+    {
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
                 System.out.print(map[y][x].getSymbol());
             }
             System.out.println();
         }
     }
 
-    public int getWidth() {
+
+    public int getWidth()
+    {
         return width;
     }
 
-    public int getHeight() {
+
+    public int getHeight()
+    {
         return height;
     }
-    
-    public void setMap(Tile[][] map) {
+
+
+    public void setMap(Tile[][] map)
+    {
+        if (map == null || map.length != height)
+        {
+            throw new IllegalArgumentException(
+                "Map height must match the place.");
+        }
+        for (Tile[] row : map)
+        {
+            if (row == null || row.length != width)
+            {
+                throw new IllegalArgumentException(
+                    "Map width must match the place.");
+            }
+        }
         this.map = map;
     }
-    
+
 }
