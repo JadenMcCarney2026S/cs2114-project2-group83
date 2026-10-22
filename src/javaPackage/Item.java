@@ -14,10 +14,12 @@ public class Item extends Enemy {
         this.damageBonus = damageBonus;
     }
 
+
     public void applyTo(Player player) {
         player.increaseHealth(healthBonus);
         player.increaseDamage(damageBonus);
     }
+
 
     public String getName() {
         return name;

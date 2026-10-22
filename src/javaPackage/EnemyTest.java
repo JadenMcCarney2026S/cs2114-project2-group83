@@ -1,5 +1,7 @@
 package javaPackage;
+
 import student.TestCase;
+
 public class EnemyTest extends TestCase {
 
     private Enemy enemy;
@@ -8,16 +10,21 @@ public class EnemyTest extends TestCase {
         enemy = new Enemy(100, 15, 0, 0, "Grunt");
     }
 
+
     public void testGetHealth() {
         assertEquals(100, enemy.getHealth());
     }
 
+
     public void testGetDamage() {
         assertEquals(15, enemy.getDamage());
     }
+
+
     public void testGetName() {
         assertEquals("Grunt", enemy.getName());
     }
+
 
     public void testTakeDamage() {
         enemy.takeDamage(20);
@@ -29,6 +36,7 @@ public class EnemyTest extends TestCase {
         enemy.takeDamage(100);
         assertEquals(0, enemy.getHealth());
     }
+
 
     public void testIsDefeated() {
         assertFalse(enemy.isDefeated());

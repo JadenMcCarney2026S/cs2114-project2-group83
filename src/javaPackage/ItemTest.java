@@ -9,18 +9,21 @@ public class ItemTest extends TestCase {
 
     public void setUp() {
         item = new Item("Health Potion", 25, 5);
-        play = new Player(100,10,0,0);
+        play = new Player(100, 10, 0, 0);
     }
+
 
     public void testGetName() {
         assertEquals("Health Potion", item.getName());
     }
-    
+
+
     public void testApplyTo() {
         item.applyTo(play);
-        assertEquals(125,play.getHealth());
-        assertEquals(15,play.getDamage());
+        assertEquals(125, play.getHealth());
+        assertEquals(15, play.getDamage());
     }
+
 
     public void testInheritedMethods() {
         assertEquals(0, item.getHealth());
@@ -28,4 +31,3 @@ public class ItemTest extends TestCase {
         assertTrue(item.isDefeated());
     }
 }
-
