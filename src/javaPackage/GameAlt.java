@@ -74,7 +74,7 @@ public class GameAlt {
             int hp;
             while (true) {
                 if (scan.hasNextInt()) {
-                    hp = scan.nextInt();
+                    hp = scan.nextInt() % 500;
                     break;
                 }
                 else {
@@ -86,7 +86,7 @@ public class GameAlt {
             int dmg;
             while (true) {
                 if (scan.hasNextInt()) {
-                    dmg = scan.nextInt();
+                    dmg = scan.nextInt() % 50;
                     break;
                 }
                 else {
